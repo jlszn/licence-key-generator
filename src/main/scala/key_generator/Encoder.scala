@@ -5,13 +5,22 @@ import java.time.LocalDate
 
 object Encoder extends App {
 
-  println(dateEncode(LocalDate.of(1999, 12,30)))
+//  println(dateEncode(LocalDate.of(1999, 12,30)))
+
+  println(encode("domain.com", LocalDate.of(1999, 12, 12)))
 
   def encode(domain: String, date: LocalDate): String = {
 
+    val encodedDomain = domainEncode(domain)
+    val encodedDate = dateEncode(date)
+
+    val withoutChecksum: String = encodedDomain.head + encodedDate(1) + encodedDomain(1) + encodedDate(2) + encodedDomain(2) + encodedDate.head + encodedDomain(3)
+
+    checksum(withoutChecksum) + withoutChecksum
+
   }
 
-  def checkSum(input: String): String = Util.crc16(BigInt(input, 16).toByteArray)
+  def checksum(input: String): String = Util.crc16(BigInt(input, 16).toByteArray)
 
   def domainEncode(domain: String): Seq[String] = {
 
