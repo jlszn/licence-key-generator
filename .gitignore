@@ -2,5 +2,5 @@
 *.log
 /.idea/
 /.gitignore
-/target
+/target/
 /project/target/
