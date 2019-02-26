@@ -56,6 +56,21 @@ object Messages {
   val infoCommand = "info"
 
   /**
+    * A symbol used as a key in dateSplits. Represents a year split
+    */
+  val yearSymbol = "Y"
+
+  /**
+    * A symbol used as a key in dateSplits. Represents a month split
+    */
+  val monthSymbol = "M"
+
+  /**
+    * A symbol used as a key in dateSplits. Represents a day split
+    */
+  val daySymbol = "D"
+
+  /**
     * An info message
     */
   val info =

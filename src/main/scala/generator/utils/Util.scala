@@ -48,12 +48,19 @@ object Util {
 
   /**
     * A sequence that represents places where an expiration date is placed
-    * Order is sensible
-    * 4 - MONTH
-    * 8, 9 - DAY
+    * Order is sensible DO NOT CHANGE THE ORDER. YEAR-MONTH-DAY
+    * 10, 11 - DAY
+    * 6 - MONTH
     * 13, 14, 15 - YEAR
     */
   val dateIndexes: Seq[Seq[Int]] = Seq(Seq(13, 14, 15), Seq(6), Seq(10, 11))
+
+  /**
+    * A sequence that describes how to split a key to extract a date
+    */
+  val dateSplits: Map[String, (Int, Int)] = Seq(Messages.yearSymbol, Messages.monthSymbol, Messages.daySymbol).zip (
+    dateIndexes.map(seq => (seq.min, seq.max + 1))
+  ).toMap
 
   /**
     * An amount of bites in 1 symbol. Just useful constant
@@ -97,7 +104,6 @@ object Util {
     * @return a new checksum
     */
   def crc16(data: Array[Byte]): String = {
-
     var crc = 0xFFFF
 
     for (i <- data.indices) {
@@ -107,8 +113,8 @@ object Util {
       crc ^= (crc << 12) & 0xFFFF
       crc ^= ((crc & 0xFF) << 5) & 0xFFFF
     }
-    String.format(s"%0${checksumLength}X", Integer.valueOf(crc))
 
+    String.format(s"%0${checksumLength}X", Integer.valueOf(crc))
   }
 
   /**
@@ -118,10 +124,7 @@ object Util {
     * @param segmentStep a length of 1 key window
     * @return a key with hyphens
     */
-  def addDelimiters(target: String, segmentLength: Int, segmentStep: Int, delimiter: String): String = {
-
+  def addDelimiters(target: String, segmentLength: Int, segmentStep: Int, delimiter: String): String =
     target.sliding(segmentLength, segmentStep).mkString(delimiter)
-
-  }
 
 }

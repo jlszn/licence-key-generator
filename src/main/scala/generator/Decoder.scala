@@ -9,20 +9,14 @@ import generator.utils.{Messages, Util}
   */
 object Decoder {
 
-  //positions of date values in key
-  val DAY_POSITIONS: (Int, Int) = (6, 7)
-  val MONTH_POSITIONS: (Int, Int) = (10, 12)
-  val YEAR_POSITIONS: (Int, Int) = (13, 16)
-
   /**
     * This method checks a checksum of a key. If it's wrong, then the whole key is wrong
     * @param checksum extracted checksum
     * @param key key without checksum
     * @return true if checksum is right, false otherwise
     */
-  def checkChecksum(checksum: String, key: String): Boolean = {
+  def checkChecksum(checksum: String, key: String): Boolean =
     checksum.equals(Util.crc16(BigInt(key, Util.radix).toByteArray))
-  }
 
   /**
     * This method checks a domain
@@ -49,9 +43,13 @@ object Decoder {
     * @return true if an encoded date is valid
     */
   def isExpired(key: String): Boolean = {
-    val month = Integer.parseInt(key.substring(MONTH_POSITIONS._1, MONTH_POSITIONS._2), Util.radix)
-    val day = Integer.parseInt(key.substring(DAY_POSITIONS._1, DAY_POSITIONS._2), Util.radix)
-    val year = Integer.parseInt(key.substring(YEAR_POSITIONS._1, YEAR_POSITIONS._2), Util.radix)
+    val mSplit = Util.dateSplits(Messages.monthSymbol)
+    val dSplit = Util.dateSplits(Messages.daySymbol)
+    val ySplit = Util.dateSplits(Messages.yearSymbol)
+
+    val month = Integer.parseInt(key.substring(mSplit._1, mSplit._2), Util.radix)
+    val day = Integer.parseInt(key.substring(dSplit._1, dSplit._2), Util.radix)
+    val year = Integer.parseInt(key.substring(ySplit._1, ySplit._2), Util.radix)
 
     val checkResult = LocalDate.of(year, month, day).isAfter(LocalDate.now())
 
@@ -83,7 +81,6 @@ object Decoder {
 
       if(res) println(Messages.validKey) else println(Messages.invalidKey)
       res
-
     }
   }
 

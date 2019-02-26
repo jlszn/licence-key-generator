@@ -17,7 +17,6 @@ object Encoder {
     * @return
     */
   def encode(domain: String, date: LocalDate): String = {
-
     val encodedDomain = domainEncode(domain)
     val encodedDate = dateEncode(date)
 
@@ -49,7 +48,6 @@ object Encoder {
     * @return a sequence of hex-strings that represent the domain
     */
   def domainEncode(domain: String): Seq[String] = {
-
     val messageDigest = MessageDigest.getInstance(Messages.hashingAlgorithm)
     val encodedNumber = BigInt(messageDigest.digest(domain.getBytes()))
 
@@ -65,12 +63,9 @@ object Encoder {
     * @param date an expiration date to encode
     * @return a sequence of HEX-strings that represent a date according to positions in a key
     */
-  def dateEncode(date: LocalDate): Seq[String] = {
-
+  def dateEncode(date: LocalDate): Seq[String] =
     Seq(date.getYear, date.getMonthValue, date.getDayOfMonth)
       .zip(Util.dateIndexes)
       .map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
-
-  }
 
 }
