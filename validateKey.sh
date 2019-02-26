@@ -1,3 +1,7 @@
 #!/bin/sh
 
-sbt "run validate-key $1"
+h=$(hostname)
+
+sbt "run validate-key $1 $h"
+
+echo $h
