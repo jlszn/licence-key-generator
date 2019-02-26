@@ -2,7 +2,7 @@ package generator
 
 import java.time.LocalDate
 
-import org.scalatest.{FlatSpec, Matchers, WordSpec}
+import org.scalatest.{Matchers, WordSpec}
 
 class EncodeDecodeTest extends WordSpec with Matchers {
 

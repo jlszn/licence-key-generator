@@ -2,8 +2,7 @@ package generator
 import java.io.ByteArrayOutputStream
 
 import generator.utils.Messages
-import org.scalatest.{FlatSpec, Matchers, WordSpec}
-
+import org.scalatest.{Matchers, WordSpec}
 
 class AppTest extends WordSpec with Matchers {
 
