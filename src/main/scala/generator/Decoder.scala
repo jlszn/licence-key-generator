@@ -64,7 +64,7 @@ object Decoder {
   def verify(key: String, domain: String): Boolean = {
     val clearKey = key.split("-").mkString
 
-    if (clearKey.size > 20) {
+    if (clearKey.length != 20) {
       println("Key is invalid!")
       false
     } else {
