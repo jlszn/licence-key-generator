@@ -22,7 +22,7 @@ object Encoder {
       encodedDate.head +
       encodedDomain(3)
 
-    checksum(withoutChecksum) + withoutChecksum
+    Util.addHyphens(checksum(withoutChecksum) + withoutChecksum, Util.keySegmentLength, Util.keySegmentStep)
 
   }
 
