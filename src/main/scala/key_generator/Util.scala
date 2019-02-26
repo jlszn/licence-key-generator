@@ -2,7 +2,7 @@ package key_generator
 
 object Util {
 
-  val srcLength = 4
+  val crcLength = 4
 
   def crc16(data: Array[Byte]): String = {
 
@@ -15,7 +15,7 @@ object Util {
       crc ^= (crc << 12) & 0xFFFF
       crc ^= ((crc & 0xFF) << 5) & 0xFFFF
     }
-    String.format(s"%0${srcLength}X", Integer.valueOf(crc))
+    String.format(s"%0${crcLength}X", Integer.valueOf(crc))
 
   }
 

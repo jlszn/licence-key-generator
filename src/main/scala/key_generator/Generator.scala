@@ -3,8 +3,9 @@ package key_generator
 import java.security.MessageDigest
 import java.time.LocalDate
 
-object Generator {
+object Generator extends App {
 
+  println(generate("domain.com", LocalDate.of(1399, 12, 12)))
 
   /**
    *
@@ -17,7 +18,13 @@ object Generator {
     val encodedDomain = domainEncode(domain)
     val encodedDate = dateEncode(date)
 
-    val withoutChecksum: String = encodedDomain.head + encodedDate(1) + encodedDomain(1) + encodedDate(2) + encodedDomain(2) + encodedDate.head + encodedDomain(3)
+    val withoutChecksum: String = encodedDomain.head +
+      encodedDate(1) +
+      encodedDomain(1) +
+      encodedDate(2) +
+      encodedDomain(2) +
+      encodedDate.head +
+      encodedDomain(3)
 
     checksum(withoutChecksum) + withoutChecksum
 
@@ -30,7 +37,8 @@ object Generator {
     val messageDigest = MessageDigest.getInstance("SHA-512")
     val encodedNumber = BigInt(messageDigest.digest(domain.getBytes()))
 
-    val domainString = String.format(s"%0${Security.domainLength}X", Integer.valueOf((encodedNumber % BigInt(2).pow(40)).toInt))
+    val domainString = String.format(s"%0${Security.domainLength}X",
+      Integer.valueOf((encodedNumber % BigInt(2).pow(40)).toInt))
 
     Security.domainSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
 
@@ -38,7 +46,9 @@ object Generator {
 
   def dateEncode(date: LocalDate): Seq[String] = {
 
-    Seq(date.getYear, date.getMonthValue, date.getDayOfMonth).zip(Security.dateIndexes).map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
+    Seq(date.getYear, date.getMonthValue, date.getDayOfMonth)
+      .zip(Security.dateIndexes)
+      .map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
 
   }
 
