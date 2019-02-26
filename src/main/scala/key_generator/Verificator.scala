@@ -7,18 +7,20 @@ import key_generator.utils.Util
 object Verificator {
 
   /**
-   *
-   * @return output message 'valid' or 'invalid'
-   */
-
-  def main(args: Array[String]): Unit = {
-    println(verify("0686-002E-1E1A-77E4-639C"))
-  }
-
+    *
+    * @param checksum
+    * @param key
+    * @return
+    */
   def checkChecksum(checksum: String, key: String): Boolean = {
     checksum.equals(Util.crc16(BigInt(key, 16).toByteArray))
   }
 
+  /**
+    *
+    * @param key
+    * @return
+    */
   def isExpired(key: String): Boolean = {
     val month = Integer.parseInt(key.substring(6, 7), 16)
     val day = Integer.parseInt(key.substring(10, 12), 16)
@@ -27,6 +29,11 @@ object Verificator {
     LocalDate.of(year, month, day).isAfter(LocalDate.now())
   }
 
+  /**
+    *
+    * @param key
+    * @return
+    */
   def verify(key: String): Boolean = {
     val clearKey = key.split("-").mkString
 
