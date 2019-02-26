@@ -1,4 +1,4 @@
-package key_generator
+package key_generator.utils
 
 object Util {
 

@@ -3,11 +3,13 @@ package key_generator
 import java.security.MessageDigest
 import java.time.LocalDate
 
+import key_generator.utils.{Security, Util}
+
 object Encoder extends App {
 
 //  println(dateEncode(LocalDate.of(1999, 12,30)))
 
-  println(encode("domain.com", LocalDate.of(1999, 12, 12)))
+  println(encode("domain.com", LocalDate.of(2020, 2, 26)))
 
   def encode(domain: String, date: LocalDate): String = {
 
@@ -35,7 +37,9 @@ object Encoder extends App {
 
   def dateEncode(date: LocalDate): Seq[String] = {
 
-    Seq(date.getYear, date.getMonthValue, date.getDayOfMonth).zip(Security.dateIndexes).map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
+    Seq(date.getYear, date.getMonthValue, date.getDayOfMonth)
+      .zip(Security.dateIndexes)
+      .map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
 
   }
 
