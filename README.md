@@ -14,6 +14,7 @@ This program was created for a license key generation and validation.
 2. App - an entrypoint
 3. Decoder - an object that consists of methods used for decoding and validation of a key.
 4. Encoder - an object that consists of methods used for key generation.
+4. Messages - an object that contains different useful messages and strings 
 
 #### Additional documentation
 
