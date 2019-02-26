@@ -9,16 +9,20 @@ import generator.utils.{Messages, Util}
   */
 object Decoder {
 
+  //positions of date values in key
   val DAY_POSITIONS: (Int, Int) = (6, 7)
   val MONTH_POSITIONS: (Int, Int) = (10, 12)
   val YEAR_POSITIONS: (Int, Int) = (13, 16)
+
   val RADIX = 16
 
+  //position of domain values in key
   val DOMAIN_FIRST: (Int, Int) = (4, 6)
   val DOMAIN_SECOND: (Int, Int) = (7, 10)
   val DOMAIN_THIRD: (Int, Int) = (12, 13)
   val DOMAIN_FOURTH = 16
 
+  //checksum position in key
   val CHECKSUM: (Int, Int) = (0, 4)
 
   val WITHOUT_CHECKSUM_BEGIN = 4
