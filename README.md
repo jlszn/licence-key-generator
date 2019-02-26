@@ -6,6 +6,7 @@ This program was created for a license key generation and validation.
 
 1) To generate a key run `./generateKey.sh <domain> <date>`. Date must have the following format dd-mm-yyyy
 2) To validate a key run `./validateKey.sh <key>`. After it you will see corresponding result as a message
+3) To test a program - run `sbt test`
 
 ## Structure
 

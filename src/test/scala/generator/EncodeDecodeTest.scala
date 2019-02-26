@@ -45,4 +45,12 @@ class EncodeDecodeTest extends FlatSpec with Matchers {
     Decoder.verify(key, "domain.com") shouldBe true
   }
 
+  "Encoder method encode" should "return equals values for the same input" in {
+    val domain = "domain.com"
+
+    val date = LocalDate.of(2020, 11, 11)
+
+    Encoder.encode(domain, date) shouldEqual Encoder.encode(domain, date)
+  }
+
 }
