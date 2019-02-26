@@ -6,7 +6,7 @@ import java.time.LocalDate
 import generator.utils.Util
 
 /**
-  * This class is used for a key generation
+  * This object is used for a key generation
   */
 object Encoder {
 

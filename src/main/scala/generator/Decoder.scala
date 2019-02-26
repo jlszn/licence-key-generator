@@ -5,7 +5,7 @@ import java.time.LocalDate
 import generator.utils.Util
 
 /**
-  * This class is used for a key verification and parsing.
+  * This object is used for a key verification and parsing.
   */
 object Decoder {
 
