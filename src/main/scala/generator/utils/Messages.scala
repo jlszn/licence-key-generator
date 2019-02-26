@@ -71,6 +71,21 @@ object Messages {
   val daySymbol = "D"
 
   /**
+    * Message when domain argument is empty
+    */
+  val emptyDomain = "Domain is required"
+
+  /**
+    * Message when date argument is empty
+    */
+  val emptyDate = "Date is required"
+
+  /**
+    * Message when key argument is empty
+    */
+  val emptyKey = "Key is required"
+
+  /**
     * An info message
     */
   val info =

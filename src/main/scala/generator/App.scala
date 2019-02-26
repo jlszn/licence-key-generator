@@ -13,11 +13,28 @@ object App {
     */
   def main(args: Array[String]): Unit = {
 
+    //commented because for testing with different domains
+//    val currentMachineDomain = java.net.InetAddress.getLocalHost.getHostName
+
     args(0) match {
 
-      case Messages.generateKeyCommand => println(Encoder.encode(args(1), Util.parseDateToString(args(2))))
+      case Messages.generateKeyCommand =>
+        if (args.length < 2) {
+          println(Messages.emptyDomain)
+        } else if (args.length < 3) {
+          println(Messages.emptyDate)
+        } else {
+          println(Encoder.encode(args(1), Util.parseDateToString(args(2))))
+        }
 
-      case Messages.validateKeyCommand => Decoder.verify(args(1), args(2))
+      case Messages.validateKeyCommand =>
+        if (args.length < 2) {
+          println(Messages.emptyKey)
+        } else if (args.length < 3) {
+          println(Messages.emptyDomain)
+        } else {
+          Decoder.verify(args(1), args(2))
+        }
 
       case Messages.infoCommand => println(Messages.info)
 

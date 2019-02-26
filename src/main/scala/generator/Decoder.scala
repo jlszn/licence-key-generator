@@ -65,6 +65,7 @@ object Decoder {
     * @param key a key to check
     * @return true if the key is valid, false otherwise
     */
+  //domain add to params for testing with different domains, not only in one machine
   def verify(key: String, domain: String): Boolean = {
     val clearKey = key.split(Messages.delimiter).mkString
 
