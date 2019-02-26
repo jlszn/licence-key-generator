@@ -68,7 +68,11 @@ object Decoder {
       println("Key is invalid!")
       false
     } else {
-      checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
+
+      val res = checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
+      if(res) println("Valid") else println("Invalid, try another key")
+      res
+
     }
   }
 
