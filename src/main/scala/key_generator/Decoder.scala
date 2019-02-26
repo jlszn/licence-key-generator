@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 import key_generator.utils.Util
 
-object Verificator {
+object Decoder {
 
   /**
     *
