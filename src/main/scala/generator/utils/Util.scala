@@ -8,6 +8,11 @@ import java.time.LocalDate
 object Util {
 
   /**
+    * A radix of symbols
+    */
+  val radix = 16
+
+  /**
     * A length of a key
     */
   val keyLength = 20
@@ -15,7 +20,7 @@ object Util {
   /**
     * A sequence that represents places where a checksum is placed
     */
-  val checkSumIndexes: Seq[Int] = Seq(0, 1, 2, 3)
+  val checksumIndexes: Seq[Int] = Seq(0, 1, 2, 3)
 
   /**
     * A sequence that represents places where a domain is placed
@@ -25,10 +30,21 @@ object Util {
   /**
     * A sequence that describes how to divide an entire key
     */
-  val domainSplits: Seq[(Int, Int)] = domainIndexes
+  val domainDivideSplits: Seq[(Int, Int)] = domainIndexes
     .map(_.size)
     .scanLeft(0)(_ + _).tail
     .scanLeft((0,0))((prev, i) => (prev._2, i) ).tail
+
+  /**
+    * A sequence that describes how to split a key to extract a domain
+    */
+  val domainExtractSplits: Seq[(Int, Int)] = domainIndexes
+    .map(seq => (seq.min, seq.max + 1))
+
+  /**
+    * A sequence that describes how to split a key to extract a checksum
+    */
+  val checksumExtractSplits: (Int, Int) = (checksumIndexes.min, checksumIndexes.max + 1)
 
   /**
     * A sequence that represents places where an expiration date is placed
@@ -47,7 +63,7 @@ object Util {
   /**
     * A length of a checksum part of a key
     */
-  val checksumLength: Int = checkSumIndexes.size
+  val checksumLength: Int = checksumIndexes.size
 
   /**
     * A length of a domain part of a key

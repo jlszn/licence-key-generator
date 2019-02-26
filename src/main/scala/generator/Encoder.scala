@@ -40,7 +40,7 @@ object Encoder {
     * @param input a key without checksum
     * @return a checksum for this key
     */
-  def checksum(input: String): String = Util.crc16(BigInt(input, 16).toByteArray)
+  def checksum(input: String): String = Util.crc16(BigInt(input, Util.radix).toByteArray)
 
   /**
     * This method encodes domain as a sequence of HEX-digits combined into sequences of string according to positions
@@ -56,7 +56,7 @@ object Encoder {
     val domainString = String.format(s"%0${Util.domainLength}X",
       Integer.valueOf((encodedNumber % BigInt(2).pow(40)).toInt))
 
-    Util.domainSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
+    Util.domainDivideSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
 
   }
 
