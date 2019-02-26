@@ -50,7 +50,7 @@ object Encoder {
     */
   def domainEncode(domain: String): Seq[String] = {
 
-    val messageDigest = MessageDigest.getInstance("SHA-512")
+    val messageDigest = MessageDigest.getInstance(Messages.hashingAlgorithm)
     val encodedNumber = BigInt(messageDigest.digest(domain.getBytes()))
 
     val domainString = String.format(s"%0${Util.domainLength}X",

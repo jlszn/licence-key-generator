@@ -17,7 +17,7 @@ object App {
     } else if (args(0) == Messages.validateKeyCommand) {
       Decoder.verify(args(1), args(2))
     } else {
-      println("Unknown command")
+      println(Messages.unknownCommand)
     }
   }
 

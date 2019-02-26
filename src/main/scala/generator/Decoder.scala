@@ -31,7 +31,7 @@ object Decoder {
     val checkResult = Encoder.domainEncode(domain).mkString == domainInKey
 
     if (!checkResult) {
-      println("Your domain is invalid!")
+      println(Messages.invalidDomain)
     }
 
     checkResult
@@ -50,7 +50,7 @@ object Decoder {
     val checkResult = LocalDate.of(year, month, day).isAfter(LocalDate.now())
 
     if (!checkResult) {
-      println("Your key is expired!")
+      println(Messages.expiredDate)
     }
 
     checkResult
@@ -65,12 +65,12 @@ object Decoder {
     val clearKey = key.split(Messages.delimiter).mkString
 
     if (clearKey.length != 20) {
-      println("Key is invalid!")
+      println(Messages.invalidKey)
       false
     } else {
 
       val res = checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
-      if(res) println("Valid") else println("Invalid, try another key")
+      if(res) println(Messages.validKey) else println(Messages.invalidKey)
       res
 
     }
