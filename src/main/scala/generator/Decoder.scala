@@ -4,22 +4,25 @@ import java.time.LocalDate
 
 import generator.utils.Util
 
+/**
+  * This class is used for a key verification and parsing.
+  */
 object Decoder {
 
   /**
-    *
-    * @param checksum
-    * @param key
-    * @return
+    * This method checks a checksum of a key. If it's wrong, then the whole key is wrong
+    * @param checksum extracted checksum
+    * @param key key without checksum
+    * @return true if checksum is right, false otherwise
     */
   def checkChecksum(checksum: String, key: String): Boolean = {
     checksum.equals(Util.crc16(BigInt(key, 16).toByteArray))
   }
 
   /**
-    *
-    * @param key
-    * @return
+    * This method checks if a working period of a key is expired
+    * @param key a key to check
+    * @return true if an encoded date is valid
     */
   def isExpired(key: String): Boolean = {
     val month = Integer.parseInt(key.substring(6, 7), 16)
@@ -30,14 +33,14 @@ object Decoder {
   }
 
   /**
-    *
-    * @param key
-    * @return
+    * This method checks if a key is valid
+    * @param key a key to check
+    * @return true if the key is valid, false otherwise
     */
   def verify(key: String): Boolean = {
     val clearKey = key.split("-").mkString
 
-    isExpired(clearKey) && checkChecksum(clearKey.substring(0, 4), clearKey.substring(4))
+    checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey)
   }
 
 }
