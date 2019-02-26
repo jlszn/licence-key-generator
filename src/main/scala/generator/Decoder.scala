@@ -9,6 +9,20 @@ import generator.utils.{Messages, Util}
   */
 object Decoder {
 
+  val DAY_POSITIONS: (Int, Int) = (6, 7)
+  val MONTH_POSITIONS: (Int, Int) = (10, 12)
+  val YEAR_POSITIONS: (Int, Int) = (13, 16)
+  val RADIX = 16
+
+  val DOMAIN_FIRST: (Int, Int) = (4, 6)
+  val DOMAIN_SECOND: (Int, Int) = (7, 10)
+  val DOMAIN_THIRD: (Int, Int) = (12, 13)
+  val DOMAIN_FOURTH = 16
+
+  val CHECKSUM: (Int, Int) = (0, 4)
+
+  val WITHOUT_CHECKSUM_BEGIN = 4
+
   /**
     * This method checks a checksum of a key. If it's wrong, then the whole key is wrong
     * @param checksum extracted checksum
@@ -16,7 +30,7 @@ object Decoder {
     * @return true if checksum is right, false otherwise
     */
   def checkChecksum(checksum: String, key: String): Boolean = {
-    checksum.equals(Util.crc16(BigInt(key, 16).toByteArray))
+    checksum.equals(Util.crc16(BigInt(key, RADIX).toByteArray))
   }
 
   /**
@@ -26,7 +40,11 @@ object Decoder {
     * @return true if encoded domain and passed domain are equal, false otherwise
     */
   def checkDomain(key: String, domain: String): Boolean = {
-    val domainInKey = key.substring(4, 6) + key.substring(7, 10) + key.substring(12, 13) + key.substring(16)
+    val domainInKey =
+        key.substring(DOMAIN_FIRST._1, DOMAIN_FIRST._2) +
+        key.substring(DOMAIN_SECOND._1, DOMAIN_SECOND._2) +
+        key.substring(DOMAIN_THIRD._1, DOMAIN_THIRD._2) +
+        key.substring(DOMAIN_FOURTH)
 
     val checkResult = Encoder.domainEncode(domain).mkString == domainInKey
 
@@ -43,9 +61,9 @@ object Decoder {
     * @return true if an encoded date is valid
     */
   def isExpired(key: String): Boolean = {
-    val month = Integer.parseInt(key.substring(6, 7), 16)
-    val day = Integer.parseInt(key.substring(10, 12), 16)
-    val year = Integer.parseInt(key.substring(13, 16), 16)
+    val month = Integer.parseInt(key.substring(MONTH_POSITIONS._1, MONTH_POSITIONS._2), RADIX)
+    val day = Integer.parseInt(key.substring(DAY_POSITIONS._1, DAY_POSITIONS._2), RADIX)
+    val year = Integer.parseInt(key.substring(YEAR_POSITIONS._1, YEAR_POSITIONS._2), RADIX)
 
     val checkResult = LocalDate.of(year, month, day).isAfter(LocalDate.now())
 
@@ -69,7 +87,7 @@ object Decoder {
       false
     } else {
 
-      val res = checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
+      val res = checkChecksum(clearKey.substring(CHECKSUM._1, CHECKSUM._2), clearKey.substring(WITHOUT_CHECKSUM_BEGIN)) && isExpired(clearKey) && checkDomain(clearKey, domain)
       if(res) println(Messages.validKey) else println(Messages.invalidKey)
       res
 
