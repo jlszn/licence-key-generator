@@ -59,6 +59,11 @@ object Util {
     */
   val keySegmentStep = 4
 
+  /**
+    * This method parses a date entered by user to a LocalDate
+    * @param date an entered date
+    * @return a LocalDate object that represents an entered date
+    */
   def parseDateToString(date: String): LocalDate = {
     val splitted = date.split("-")
 
