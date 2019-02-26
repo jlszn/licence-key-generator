@@ -1,5 +1,7 @@
 package generator.utils
 
+import java.time.LocalDate
+
 /**
   * This utilitarian class contains useful constants and methods.
   */
@@ -56,6 +58,12 @@ object Util {
     *A Length of 1 key window
     */
   val keySegmentStep = 4
+
+  def parseDateToString(date: String): LocalDate = {
+    val splitted = date.split("-")
+
+    LocalDate.of(Integer.parseInt(splitted(2)), Integer.parseInt(splitted(1)), Integer.parseInt(splitted(0)))
+  }
 
   /**
     * This method calculates a checksum as a CRC-16 value
