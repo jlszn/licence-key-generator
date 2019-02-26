@@ -7,8 +7,6 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class AppTest extends FlatSpec with Matchers {
 
-  val validKey = "E1A9-0018-D101-1833-149B"
-
   def mockOut[T](t: => T): String = {
 
     val output = new ByteArrayOutputStream()
@@ -42,14 +40,14 @@ class AppTest extends FlatSpec with Matchers {
 
   "App method main" should "write valid if key is valid" in {
 
-    mockOut(App.main(Array(Messages.validateKeyCommand, validKey, "golubnichiy"))) shouldEqual
+    mockOut(App.main(Array(Messages.validateKeyCommand, "E1A9-0018-D101-1833-149B", "golubnichiy"))) shouldEqual
       Messages.validKey + System.lineSeparator()
 
   }
 
   "App method main" should "write invalid domain if it's wrong" in {
 
-    mockOut(App.main(Array(Messages.validateKeyCommand, validKey, "golub"))) shouldEqual
+    mockOut(App.main(Array(Messages.validateKeyCommand, "E1A9-0018-D101-1833-149B", "golub"))) shouldEqual
     Messages.invalidDomain + System.lineSeparator() + Messages.invalidKey + System.lineSeparator()
 
   }
