@@ -3,17 +3,13 @@ package key_generator
 import java.security.MessageDigest
 import java.time.LocalDate
 
-object Generator extends App {
+import key_generator.utils.Util
 
-  println(generate("domain.com", LocalDate.of(1399, 12, 12)))
+object Encoder {
 
-  /**
-   *
-   * @param domain domain name, used in key generation and verification
-   * @param date key expiration date, used in key generation
-   * @return outputs generated licence key
-   */
-  def generate(domain: String, date: LocalDate): String = {
+  println(encode("domain.com", LocalDate.of(2020, 2, 26)))
+
+  def encode(domain: String, date: LocalDate): String = {
 
     val encodedDomain = domainEncode(domain)
     val encodedDate = dateEncode(date)
@@ -37,17 +33,17 @@ object Generator extends App {
     val messageDigest = MessageDigest.getInstance("SHA-512")
     val encodedNumber = BigInt(messageDigest.digest(domain.getBytes()))
 
-    val domainString = String.format(s"%0${Security.domainLength}X",
+    val domainString = String.format(s"%0${Util.domainLength}X",
       Integer.valueOf((encodedNumber % BigInt(2).pow(40)).toInt))
 
-    Security.domainSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
+    Util.domainSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
 
   }
 
   def dateEncode(date: LocalDate): Seq[String] = {
 
     Seq(date.getYear, date.getMonthValue, date.getDayOfMonth)
-      .zip(Security.dateIndexes)
+      .zip(Util.dateIndexes)
       .map(pair => String.format(s"%0${pair._2.size}X", Integer.valueOf(pair._1)))
 
   }
