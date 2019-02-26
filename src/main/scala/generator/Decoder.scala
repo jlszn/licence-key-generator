@@ -19,6 +19,12 @@ object Decoder {
     checksum.equals(Util.crc16(BigInt(key, 16).toByteArray))
   }
 
+  def checkDomain(key: String, domain: String): Boolean = {
+    val domainInKey = key.substring(4, 6) + key.substring(7, 10) + key.substring(12, 13) + key.substring(16)
+
+    Encoder.domainEncode(domain).mkString == domainInKey
+  }
+
   /**
     * This method checks if a working period of a key is expired
     * @param key a key to check
@@ -37,10 +43,10 @@ object Decoder {
     * @param key a key to check
     * @return true if the key is valid, false otherwise
     */
-  def verify(key: String): Boolean = {
+  def verify(key: String, domain: String): Boolean = {
     val clearKey = key.split("-").mkString
 
-    checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey)
+    checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
   }
 
 }
