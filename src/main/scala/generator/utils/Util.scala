@@ -8,6 +8,11 @@ import java.time.LocalDate
 object Util {
 
   /**
+    * A length of a key
+    */
+  val keyLength = 20
+
+  /**
     * A sequence that represents places where a checksum is placed
     */
   val checkSumIndexes: Seq[Int] = Seq(0, 1, 2, 3)
