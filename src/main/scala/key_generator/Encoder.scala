@@ -7,8 +7,6 @@ import key_generator.utils.Util
 
 object Encoder {
 
-  println(encode("domain.com", LocalDate.of(2020, 2, 26)))
-
   def encode(domain: String, date: LocalDate): String = {
 
     val encodedDomain = domainEncode(domain)
