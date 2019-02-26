@@ -97,9 +97,9 @@ object Util {
     * @param segmentStep a length of 1 key window
     * @return a key with hyphens
     */
-  def addHyphens(target: String, segmentLength: Int, segmentStep: Int): String = {
+  def addDelimiters(target: String, segmentLength: Int, segmentStep: Int, delimiter: String): String = {
 
-    target.sliding(segmentLength, segmentStep).mkString("-")
+    target.sliding(segmentLength, segmentStep).mkString(delimiter)
 
   }
 

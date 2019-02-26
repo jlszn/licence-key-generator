@@ -3,7 +3,7 @@ package generator
 import java.security.MessageDigest
 import java.time.LocalDate
 
-import generator.utils.Util
+import generator.utils.{Messages, Util}
 
 /**
   * This object is used for a key generation
@@ -29,7 +29,9 @@ object Encoder {
       encodedDate.head +
       encodedDomain(3)
 
-    Util.addHyphens(checksum(withoutChecksum) + withoutChecksum, Util.keySegmentLength, Util.keySegmentStep)
+    Util.addDelimiters(
+      checksum(withoutChecksum) + withoutChecksum, Util.keySegmentLength, Util.keySegmentStep, Messages.delimiter
+    )
 
   }
 

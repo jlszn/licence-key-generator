@@ -2,7 +2,7 @@ package generator
 
 import java.time.LocalDate
 
-import generator.utils.Util
+import generator.utils.{Messages, Util}
 
 /**
   * This object is used for a key verification and parsing.
@@ -62,7 +62,7 @@ object Decoder {
     * @return true if the key is valid, false otherwise
     */
   def verify(key: String, domain: String): Boolean = {
-    val clearKey = key.split("-").mkString
+    val clearKey = key.split(Messages.delimiter).mkString
 
     if (clearKey.length != 20) {
       println("Key is invalid!")
