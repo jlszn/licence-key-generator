@@ -6,7 +6,7 @@ This program was created for a license key generation and validation.
 There is 2 variants: right from the code or generate a jar and use it
 1. Run right from the code (all scripts lie in a root folder to have an access to build.sbt)
     1) To generate a key run `./generateKey.sh <domain> <date>`. Date must have the following format dd-mm-yyyy
-    2) To validate a key run `./validateKey.sh <key>`. After it you will see corresponding result as a message
+    2) To validate a key run `./validateKey.sh <key>`. After it you will see a corresponding result as a message
     3) To test a program - run `sbt test`
 2. Through a jar file
     1. Run `sbt assembly` in a root folder. It will generate a jar file in a ./jar folder. It will run tests too.
