@@ -1,12 +1,6 @@
 *.class
 *.log
-<<<<<<< HEAD
 /.idea/
 /.gitignore
-/target/
-/project/target/
-=======
-.idea
-project/target
+/project
 target
->>>>>>> origin/dev
