@@ -28,7 +28,13 @@ object Decoder {
   def checkDomain(key: String, domain: String): Boolean = {
     val domainInKey = key.substring(4, 6) + key.substring(7, 10) + key.substring(12, 13) + key.substring(16)
 
-    Encoder.domainEncode(domain).mkString == domainInKey
+    val checkResult = Encoder.domainEncode(domain).mkString == domainInKey
+
+    if (!checkResult) {
+      println("Your domain is invalid!")
+    }
+
+    checkResult
   }
 
   /**
@@ -41,7 +47,13 @@ object Decoder {
     val day = Integer.parseInt(key.substring(10, 12), 16)
     val year = Integer.parseInt(key.substring(13, 16), 16)
 
-    LocalDate.of(year, month, day).isAfter(LocalDate.now())
+    val checkResult = LocalDate.of(year, month, day).isAfter(LocalDate.now())
+
+    if (!checkResult) {
+      println("Your key is expired!")
+    }
+
+    checkResult
   }
 
   /**
@@ -52,7 +64,12 @@ object Decoder {
   def verify(key: String, domain: String): Boolean = {
     val clearKey = key.split("-").mkString
 
-    checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
+    if (clearKey.size > 20) {
+      println("Key is invalid!")
+      false
+    } else {
+      checkChecksum(clearKey.substring(0, 4), clearKey.substring(4)) && isExpired(clearKey) && checkDomain(clearKey, domain)
+    }
   }
 
 }
