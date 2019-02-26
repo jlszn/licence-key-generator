@@ -17,19 +17,19 @@ class AppTest extends WordSpec with Matchers {
   }
 
   "App method main" must {
-    "return error message if invalid command was passed" in {
+    "return error message if invalid command is passed" in {
 
       mockOut(App.main(Array("nocommand"))) shouldEqual Messages.unknownCommand + System.lineSeparator()
 
     }
 
-    "return info message if info was passed" in {
+    "return info message if info is passed" in {
 
       mockOut(App.main(Array(Messages.infoCommand))) shouldEqual Messages.info + System.lineSeparator()
 
     }
 
-    "generate a key if generate was passed" in {
+    "generate a key if generate is passed" in {
 
       val d = Messages.delimiter
 
@@ -72,6 +72,33 @@ class AppTest extends WordSpec with Matchers {
         Messages.expiredDate + System.lineSeparator() + Messages.invalidKey + System.lineSeparator()
 
     }
+
+    "write a domain error if a generate is called without any domain" in {
+
+      mockOut(App.main(Array(Messages.generateKeyCommand))) shouldEqual Messages.emptyDomain + System.lineSeparator()
+
+    }
+
+    "write a date error if a generate is called without any date" in {
+
+      mockOut(App.main(Array(Messages.generateKeyCommand, "domain.com"))) shouldEqual
+        Messages.emptyDate + System.lineSeparator()
+
+    }
+
+    "write a key error if a validate is called without any key" in {
+
+      mockOut(App.main(Array(Messages.validateKeyCommand))) shouldEqual Messages.emptyKey + System.lineSeparator()
+
+    }
+
+    "write a ket error if a validate is called without any domain" in {
+
+      mockOut(App.main(Array(Messages.validateKeyCommand, "DACD-00B8-D101-144B-149B"))) shouldEqual
+        Messages.emptyDomain + System.lineSeparator()
+
+    }
+
   }
 
 }

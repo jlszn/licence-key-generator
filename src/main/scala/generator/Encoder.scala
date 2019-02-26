@@ -21,9 +21,9 @@ object Encoder {
     val encodedDate = dateEncode(date)
 
     val withoutChecksum: String = encodedDomain.head +
-      encodedDate(1) +
+      encodedDate(1)   +
       encodedDomain(1) +
-      encodedDate(2) +
+      encodedDate(2)   +
       encodedDomain(2) +
       encodedDate.head +
       encodedDomain(3)
@@ -55,7 +55,6 @@ object Encoder {
       Integer.valueOf((encodedNumber % BigInt(2).pow(40)).toInt))
 
     Util.domainDivideSplits.map(indexes => domainString.substring(indexes._1, indexes._2))
-
   }
 
   /**
