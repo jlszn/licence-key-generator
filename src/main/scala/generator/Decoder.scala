@@ -1,8 +1,8 @@
-package key_generator
+package generator
 
 import java.time.LocalDate
 
-import key_generator.utils.Util
+import generator.utils.Util
 
 object Decoder {
 

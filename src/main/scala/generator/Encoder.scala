@@ -1,9 +1,9 @@
-package key_generator
+package generator
 
 import java.security.MessageDigest
 import java.time.LocalDate
 
-import key_generator.utils.Util
+import generator.utils.Util
 
 object Encoder {
 
