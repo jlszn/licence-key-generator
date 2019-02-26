@@ -19,6 +19,12 @@ object Decoder {
     checksum.equals(Util.crc16(BigInt(key, 16).toByteArray))
   }
 
+  /**
+    * This method checks a domain
+    * @param key a key to check
+    * @param domain a domain of a machine
+    * @return true if encoded domain and passed domain are equal, false otherwise
+    */
   def checkDomain(key: String, domain: String): Boolean = {
     val domainInKey = key.substring(4, 6) + key.substring(7, 10) + key.substring(12, 13) + key.substring(16)
 
