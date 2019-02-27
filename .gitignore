@@ -2,7 +2,6 @@
 *.log
 /.idea/
 /.gitignore
-/project
 target
 /jar/license-key.jar
 !/project/plugins.sbt
