@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -jar license-key.jar generate-key $1 $2
+java -jar licence-key.jar generate-key $1 $2

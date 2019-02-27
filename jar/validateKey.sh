@@ -2,4 +2,4 @@
 
 h=$(hostname)
 
-java -jar license-key.jar validate-key $1 $h
+java -jar licence-key.jar validate-key $1 $h
