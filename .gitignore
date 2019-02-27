@@ -5,3 +5,5 @@
 /project
 target
 /jar/license-key.jar
+!/project/plugins.sbt
+!/project/build.properties
