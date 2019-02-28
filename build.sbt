@@ -28,8 +28,8 @@ proguardOptions in Proguard ++= Seq(
   "-keep class scala.** { *; }",
   "-keep interface scala.** { *; }",
   "-keep enum scala.** { *; }",
-  "-dontoptimize",
-  "-dontwarn scala.** "
+  "-dontwarn scala.** ",
+  "-dontnote"
 )
 
 proguardInputs in Proguard := Seq( (assemblyOutputPath in assembly).value )
