@@ -9,7 +9,9 @@ There is 2 variants: right from the code or generate a jar and use it
     2. To validate a key run `./validateKey.sh <key>`. After it you will see a corresponding result as a message
     3. To test a program - run `sbt test`
 2. Through a jar file
-    1. Run `sbt assembly` in a root folder. It will generate a jar file in a ./jar folder. It will run tests too.
+    1. Run `sbt proguard` in a root folder. It will generate 2 jar files - licence-key-encoded.jar
+     and licence-key.jar in a ./jar folder.. The first one is encoded by progurard so you should use it.
+     It will run tests too.
     2. Open a terminal in a ./jar folder.
     3. Use the same scripts as in the previous variant. Everything is the same.
     4. To test a program - run `sbt test`
