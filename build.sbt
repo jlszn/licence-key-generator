@@ -25,12 +25,10 @@ proguardOptions in Proguard ++= Seq(
   "-keepclassmembernames class scala.concurrent.forkjoin.ForkJoinTask { \n    int status; \n} ",
   "-keepclassmembernames class scala.concurrent.forkjoin.LinkedTransferQueue { \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference head;   \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference tail; \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference cleanMe; \n} ",
   "-keepattributes InnerClasses,EnclosingMethod,Signature,*Annotation*",
-  "-keepclassmembers class scala.sys.SystemProperties",
-  "-keep interface scala.**",
+  "-keep class scala.sys.SystemProperties",
+  "-keep interface scala.sys.SystemProperties",
   "-dontoptimize",
-  "-dontwarn scala.** ",
-  "-dontshrink"
-
+  "-dontwarn scala.** "
 )
 
 proguardInputs in Proguard := Seq( (assemblyOutputPath in assembly).value )
