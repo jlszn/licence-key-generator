@@ -1,8 +1,8 @@
 *.class
 *.log
 /.idea/
-/.gitignore
 target
 !/project/plugins.sbt
 !/project/build.properties
 /jar/licence-key.jar
+/jar/licence-key-encoded.jar

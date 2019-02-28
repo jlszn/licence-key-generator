@@ -18,13 +18,7 @@ proguardInputFilter in Proguard := {file => None}
 proguardOptions in Proguard ++= Seq(
 
   "-keepclasseswithmembers public class * { \n    public static void main(java.lang.String[]); \n} ",
-  "-keep class * implements org.xml.sax.EntityResolver ",
   "-keep class * { \n    ** MODULE$; \n} ",
-  "-keepclassmembernames class scala.concurrent.forkjoin.ForkJoinPool { \n   long eventCount; \n   int  workerCounts; \n   int  runControl; \n   scala.concurrent.forkjoin.ForkJoinPool$WaitQueueNode syncStack;  \n   scala.concurrent.forkjoin.ForkJoinPool$WaitQueueNode spareStack; \n} ",
-  "-keepclassmembernames class scala.concurrent.forkjoin.ForkJoinWorkerThread { \n    int base; \n    int sp; \n    int runState; \n} ",
-  "-keepclassmembernames class scala.concurrent.forkjoin.ForkJoinTask { \n    int status; \n} ",
-  "-keepclassmembernames class scala.concurrent.forkjoin.LinkedTransferQueue { \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference head;   \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference tail; \n    scala.concurrent.forkjoin.LinkedTransferQueue$PaddedAtomicReference cleanMe; \n} ",
-  "-keepattributes InnerClasses,EnclosingMethod,Signature,*Annotation*",
   "-keep class scala.** { *; }",
   "-keep interface scala.** { *; }",
   "-keep enum scala.** { *; }",
